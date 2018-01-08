@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.board.mapper.BoardMapper">
+	<!-- 게시판에 내용삽입 -->
+	<insert id="create">
+		insert into tbl_board(title,content,writer)
+		values(#{title},#{content},#{writer})
+	</insert>
+	<!-- 해당게시물의 상세보기 -->
+	<select id="read" resultType="org.board.domain.BoardVO">
+		select bno,title,content,writer,regdate,viewcnt
+		from tbl_board
+		where bno=#{bno}
+	</select>
+	<!-- 해당 게시물의 수정 -->
+	<update id="update">
+		update tbl_board set content=#{content} where bno=#{bno}
+	</update>
+	<!-- 해당게시물 삭제 -->
+	<delete id="delete">
+		delete from tbl_board where bno=#{bno}
+	</delete>
+	<!-- 게시판의 전체 목록 보여주기  -->
+	<select id="listAll" resultType="org.board.domain.BoardVO">
+		<![CDATA[
+		select
+			bno,title,content,writer,reddate,viewcnt
+		from
+			tbl_board
+		where bno>0
+		order by bno,regdate
+		]]>
+	</select>
+</mapper>

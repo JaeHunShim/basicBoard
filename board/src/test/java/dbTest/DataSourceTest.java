@@ -1,4 +1,4 @@
-package org.board.controller;
+package dbTest;
 
 import java.sql.Connection;
 
