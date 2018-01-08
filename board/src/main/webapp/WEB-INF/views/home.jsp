@@ -1,10 +1,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
-<%@ page language="java" contentType="text/html charset=UTF-8" pageEncoding="UTF-8" %>
-
+<%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="include/header.jsp" %>
-
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <!-- main -->
+
 <section class="content">
 	<div class="row">
 	<!-- left start -->
@@ -18,5 +18,4 @@
 		</div>	<!-- left end -->
 	</div>	<!-- row end -->
 </section> <!-- content end -->
-
 <%@ include file="include/footer.jsp" %>
