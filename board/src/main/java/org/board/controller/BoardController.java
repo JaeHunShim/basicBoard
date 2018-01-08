@@ -35,7 +35,7 @@ public class BoardController {
 		return "/board/success";
 		//return "redirect:/board/listAll";
 	}
-	
+	//페이지이동
 	@RequestMapping(value="/listAll",method=RequestMethod.GET)
 	public void listAll(Model model) throws Exception{
 		logger.info("listAll show...........................");
