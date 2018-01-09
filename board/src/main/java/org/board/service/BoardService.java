@@ -3,6 +3,7 @@ package org.board.service;
 import java.util.List;
 
 import org.board.domain.BoardVO;
+import org.board.domain.Criteria;
 
 public interface BoardService {
 	//게시물 등록
@@ -15,4 +16,6 @@ public interface BoardService {
 	public void remove(Integer bno) throws Exception;
 	//게시물 목록 
 	public List<BoardVO> listAll() throws Exception;
+	//페이징 처리 
+	public List<BoardVO> listCriteria(Criteria cri) throws Exception;
 }

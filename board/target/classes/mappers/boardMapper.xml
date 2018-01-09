@@ -32,4 +32,28 @@
 		order by bno desc,regdate desc
 		]]>
 	</select>
+	<!-- 페이징 처리관련 쿼리  (가변적인 처리는 안되고 무조건 10개씩 쪼개서 사용할수 있게 한 쿼리문 )-->
+	<select id="listPage" resultType="BoardVO">
+		<![CDATA[
+		select
+			bno,title,content,writer,regdate,viewcnt
+		from
+			tbl_board
+		where bno>0
+		order by bno desc,regdate desc
+		limit #{page},10	
+		]]>
+	</select>
+	<!--  페이징 처리를  가변적으로 늘려서 할수 있는 쿼리 -->
+	<select id="listCriteria" resultType="BoardVO">
+		<![CDATA[
+		select
+			bno,title,content,writer,regdate,viewcnt
+		from
+			tbl_board
+		where bno>0
+		order by bno desc,regdate desc
+		limit #{pageStart},#{perPageNum}
+		]]>
+	</select>
 </mapper>
