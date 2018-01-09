@@ -25,11 +25,11 @@
 	<select id="listAll" resultType="org.board.domain.BoardVO">
 		<![CDATA[
 		select
-			bno,title,content,writer,reddate,viewcnt
+			bno,title,content,writer,regdate,viewcnt
 		from
 			tbl_board
 		where bno>0
-		order by bno,regdate
+		order by bno desc,regdate desc
 		]]>
 	</select>
 </mapper>
