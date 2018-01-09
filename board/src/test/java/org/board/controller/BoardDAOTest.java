@@ -27,7 +27,7 @@ public class BoardDAOTest {
 	public void testInsertBoard() throws Exception{
 		
 		BoardVO board=new BoardVO();
-		for(int i=0; i<20000; i++) {
+		for(int i=0; i<20000; i++) { //더미 데이터 넣기 
 		board.setContent("테스트코드에서 한번 입력해보겠습니다.");
 		board.setTitle("테스트");
 		board.setWriter("jaehuniya");
