@@ -59,4 +59,7 @@
 	<select id="countPaging" resultType="int">
 		<![CDATA[select count(bno) from tbl_board where bno>0]]>
 	</select>
+	<!-- <update id="addCount">
+		update tbl_board set viewcnt= viewcnt+1 where bno=#{bno}
+	</update> -->
 </mapper>

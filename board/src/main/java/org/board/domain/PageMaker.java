@@ -1,5 +1,8 @@
 package org.board.domain;
-	
+
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
+
 public class PageMaker {	//하단 페이징 처리 
 
 	private int totalCount; //총 게시물수 
@@ -84,6 +87,14 @@ public class PageMaker {	//하단 페이징 처리
 	public void setCri(Criteria cri) {
 		this.cri = cri;
 	}
-	
+	//uri에 page 뿐만 아니라 perPageNum 값을 받아서 uri에 실어서 보내는 방법 
+	public String makeQuery(int page) {
+		
+		UriComponents uriComponents= UriComponentsBuilder.newInstance()
+				.queryParam("page", page)
+				.queryParam("perPageNum", cri.getPerPageNum())
+				.build();
+		return uriComponents.toUriString();
+	}
 	
 }

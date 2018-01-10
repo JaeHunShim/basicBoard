@@ -19,7 +19,7 @@ public class Criteria { //검색기준
 	}
 	public void setPerPageNum(int perPageNum) {
 		
-		if(perPageNum<=0 || perPageNum>100) { //보여질 데이터를 100보다 작게 해놓았음  사용자에 맞추어서 
+		if(perPageNum<=0 || perPageNum>200) { //보여질 데이터를 100보다 작게 해놓았음  사용자에 맞추어서 
 			this.perPageNum=10;
 			return;
 		}

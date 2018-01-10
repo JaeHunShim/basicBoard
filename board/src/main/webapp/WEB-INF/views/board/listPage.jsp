@@ -25,7 +25,8 @@
 	<c:forEach items="${list}" var="boardVO">
 		<tr>
 			<td>${boardVO.bno}</td>
-			<td><a href="/board/read?bno=${boardVO.bno}">${boardVO.title}</a></td>
+			<%-- <td><a href="/board/read?bno=${boardVO.bno}">${boardVO.title}</a></td> --%>
+			<td><a href="/board/readPage${pageMaker.makeQuery(pageMaker.cri.page) }&bno=${boardVO.bno}">${boardVO.title }</a></td>
 			<td>${boardVO.writer}</td>
 			<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${boardVO.regdate}"/></td>
 			<td><span class="badge bg-red">${boardVO.viewcnt}</span></td>
@@ -35,7 +36,7 @@
 <div class="text-center">
 	<ul class="pagination">
 		<c:if test="${pageMaker.prev}">	<!-- &laquo "<<"이거 표시 --> 
-			<li><a href="listPage?page=${pageMaker.startPage-1 }">&laquo;</a></li><!--prev를 눌르면 보여지는 page대한 처리  -->
+			<li><a href="listPage${pageMaker.makeQuery(pageMaker.startPage-1) }">&laquo;</a></li><!--prev를 눌르면 보여지는 page대한 처리  -->
 		</c:if>
 		<!-- 페이지 번호출력에 대한 부분  반복문으로  -->
 		<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
@@ -46,7 +47,7 @@
 		</c:forEach>
 		
 		<c:if test="${pageMaker.next && pageMaker.endPage >0 }"> 
-			<li><a href="listPage?page=${pageMaker.endPage+1 }">&raquo;</a></li><!--next를 눌르면 보여지는 page대한 처리  -->
+			<li><a href="listPage${pageMaker.makeQuery(pageMaker.endPage+1) }">&raquo;</a></li><!--next를 눌르면 보여지는 page대한 처리  -->
 		</c:if>
 	</ul>
 </div>

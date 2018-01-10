@@ -56,4 +56,10 @@ public class BoardServiceImpl implements BoardService {
 		return dao.countPaging(cri);
 	}
 
+	/*@Override
+	public void addCount(int bno) throws Exception {
+		
+		dao.addCount(bno);
+	}
+*/
 }

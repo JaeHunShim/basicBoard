@@ -22,4 +22,6 @@ public interface BoardDAO {
 	public List<BoardVO> listCriteria(Criteria cri) throws Exception;
 	//전체 개시물 즉 totalCount가지고오는 dao
 	public int countPaging(Criteria cri) throws Exception;
+	//게시물 카운트 올리기
+	//public void addCount(int bno) throws Exception;
 }

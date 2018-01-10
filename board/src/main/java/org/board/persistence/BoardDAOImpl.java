@@ -70,5 +70,10 @@ public class BoardDAOImpl implements BoardDAO {
 		
 		return sqlSession.selectOne(namespace+".countPaging",cri);
 	}
+	/*@Override
+	public void addCount(int bno) throws Exception {
+		
+		sqlSession.insert(namespace+".addCount",bno);
+	}*/
 
 }
