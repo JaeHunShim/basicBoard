@@ -20,4 +20,6 @@ public interface BoardDAO {
 	public List<BoardVO>listPage(int page) throws Exception;
 	//BoardDAO에  리스트를 출력하는 부분
 	public List<BoardVO> listCriteria(Criteria cri) throws Exception;
+	//전체 개시물 즉 totalCount가지고오는 dao
+	public int countPaging(Criteria cri) throws Exception;
 }

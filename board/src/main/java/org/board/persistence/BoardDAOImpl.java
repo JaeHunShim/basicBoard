@@ -64,5 +64,11 @@ public class BoardDAOImpl implements BoardDAO {
 		
 		return sqlSession.selectList(namespace+".listCriteria", cri);
 	}
+	//전체 개시물 즉 totalCount가지고오는 dao
+	@Override
+	public int countPaging(Criteria cri) throws Exception {
+		
+		return sqlSession.selectOne(namespace+".countPaging",cri);
+	}
 
 }

@@ -18,4 +18,6 @@ public interface BoardService {
 	public List<BoardVO> listAll() throws Exception;
 	//페이징 처리 
 	public List<BoardVO> listCriteria(Criteria cri) throws Exception;
+	//전체 개시물 숫자 구하기
+	public int listCountCriteria(Criteria cri) throws Exception;
 }
