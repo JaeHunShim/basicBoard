@@ -86,7 +86,8 @@ public class BoardController {
 		rttr.addAttribute("perPageNum", cri.getPerPageNum());
 		rttr.addFlashAttribute("msg", "success");
 		
-		return "redirect:/board/listPage";
+		//return "redirect:/board/listPage"; 검색기능 있기전에 
+		return "redirect:/sboard/list";
 	}
 	//수정처리는 read에 있던 데이터를 그대로 가지고 오기 위해서 model에 담아서 가지고와서 view에 뿌려줌(페이징 처리 안했을때) 
 	@RequestMapping(value="/modify", method=RequestMethod.GET)
@@ -118,7 +119,8 @@ public class BoardController {
 		attr.addAttribute("page", cri.getPage());
 		attr.addAttribute("perPageNum", cri.getPerPageNum());
 		attr.addFlashAttribute("msg", "success");
-		return "redirect:/board/listPage";
+		//return "redirect:/board/listPage"; 검색전에 리턴해주는 곳
+		return "redirect:/sboard/list";
 	}
 	//페이징 처리 연습(생성자를 아직 사용하지 않았기 때문에 실행하게 되면 default인 1,10에 해당하는 데이터들이 나옴
 	@RequestMapping(value="/listCri", method=RequestMethod.GET)

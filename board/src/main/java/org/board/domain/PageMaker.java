@@ -1,5 +1,8 @@
 package org.board.domain;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -28,7 +31,6 @@ public class PageMaker {	//하단 페이징 처리
 		next=endPage*cri.getPerPageNum()>=totalCount?false:true; //next가 활성화될려면 뒤에 남은 데이터가 있어야 하는데  총 300개의 데이터가 있다면 지금 endPage가 20이고
 																//10개씩 보여주고 있다면 계산하면 200이고  총데이터는 300인데 200>300 true가이기때문에 활성화 
 	}
-
 	public int getTotalCount() {
 		return totalCount;
 		
@@ -96,5 +98,25 @@ public class PageMaker {	//하단 페이징 처리
 				.build();
 		return uriComponents.toUriString();
 	}
-	
+	//검색할때 uri에 사용할 문자열을 생성하는 객체 각각 perPageNum,searchType,keyword를 받아와서 uri에 부려줌 
+	public String makeSearch(int page) {
+		UriComponents uriComponents= UriComponentsBuilder.newInstance()
+				.queryParam("page", page)
+				.queryParam("perPageNum", cri.getPerPageNum())
+				.queryParam("searchType", ((SeachCriteria)cri).getSearchType())
+				.queryParam("keyword", encoding(((SeachCriteria)cri).getKeyword()))
+				.build();
+		return uriComponents.toUriString();
+	}
+	private String encoding(String keyword) {
+		
+		if(keyword==null || keyword.trim().length()==0) {	//keyword.trim().length():키워드에서 공백문자를 제거한 문자열의 길이가 0이라면 이라는뜻 즉 둘다 데이터가없으면~
+			return "";
+		}
+		try {
+			return URLEncoder.encode(keyword,"UTF-8");
+		}catch(UnsupportedEncodingException e){
+			return "";
+		}
+	}
 }

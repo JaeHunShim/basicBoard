@@ -15,7 +15,8 @@ $(document).ready(function(){
 		formObj.submit();
 	});
 	$(".btn-danger").on("click",function(){
-		self.loction="/board/listPage";
+		//self.loction="/board/listPage"; 검색기능 있기전
+		self.location="/sboard/list";
 	});
 	
 });

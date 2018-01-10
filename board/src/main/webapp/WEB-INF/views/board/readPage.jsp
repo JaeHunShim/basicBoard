@@ -21,7 +21,8 @@ $(document).ready(function(){
 		formObj.submit();
 	 });
 	$(".btn-primary").on("click",function(){
-		formObj.attr("action","/board/listPage");
+		//formObj.attr("action","/board/listPage"); 검색기능 있기전
+		formObj.attr("action","/sboard/list");
 		formObj.attr("method","get");
 		formObj.submit();
 	});
