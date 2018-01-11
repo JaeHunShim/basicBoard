@@ -2,6 +2,7 @@ package org.board.persistence;
 
 import java.util.List;
 
+import org.board.domain.Criteria;
 import org.board.domain.ReplyVO;
 
 public interface ReplyDAO {
@@ -13,4 +14,8 @@ public interface ReplyDAO {
 	public void remove(Integer rno) throws Exception;
 	// 댓글 목록
 	public List<ReplyVO> list(Integer bno) throws Exception;
+	// 댓글 페이징 처리 (기존 페이징 처리와 동일)
+	public List<ReplyVO> listPage(Integer bno,Criteria cri) throws Exception;
+	// 댓글 총 갯수 세기
+	public int count(Integer bno) throws Exception;
 }

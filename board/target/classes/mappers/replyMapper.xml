@@ -21,4 +21,12 @@
 <delete id="delete">
 	delete from tbl_reply where rno=#{rno};
 </delete>
+	<!--  댓글 페이징 처리  -->
+<select id="listPage" resultType="ReplyVO">
+	select * from tbl_reply where bno=#{bno} order by bno desc limit #{cri.pageStart},#{cri.pageEnd}
+</select>
+	<!-- 댓글 총갯수 가지고오기  페이징 처리할때 totolCount가 필요하기 때문에  -->
+<select id="count" resultType="int">
+	select count(bno) from tbl_reply where bno=#{bno}
+</select>
 </mapper>
