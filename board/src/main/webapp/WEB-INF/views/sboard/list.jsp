@@ -14,7 +14,7 @@
 <!-- 검색버튼 클릭시 이벤트와 쓰기페이지로 이동 이벤트  -->
 <script>
 $(document).ready(function(){
-	
+	//url주소뒤에 붙는 값을 1로 초기하하는 부분의 쿼리
 	$("#searchBtn").on("click",function(){
 		self.location="list"+'${pageMaker.makeQuery(1)}'
 			+"&searchType="
