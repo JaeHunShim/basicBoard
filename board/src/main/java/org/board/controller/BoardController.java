@@ -19,7 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 @RequestMapping("/board/*")
 public class BoardController {
-	
+	//로그출력
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
 	@Inject
