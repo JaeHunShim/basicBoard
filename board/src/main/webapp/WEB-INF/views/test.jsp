@@ -228,11 +228,11 @@ $(document).ready(function(){
 			<button type="button" id="closebtn"> 닫기</button>
 		</div>
 	</div>
-	<ul id="replies">
+	<ul id="replies"><!-- 댓글 목록 나오는 부분(페이징처리해서   -->
 	
 	</ul>
 	
-	<ul class="pagination">
+	<ul class="pagination"><!--  페이징 처리 하단 부분 -->
 	
 	</ul>
 </body>
