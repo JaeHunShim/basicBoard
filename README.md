@@ -1,4 +1,4 @@
-#integer와 int형 의 차이 
+###integer와 int형 의 차이 
 ---
 * .int는 프리비티브타입으로  산술산이 가능하지만 null로 초기화할수가 없다
 * .integer 는 wrapper 클래스로서 객체이다 null값을 처리 할수 있다. 그래서 sql과 연동할경우에 처리가 용이하다 
