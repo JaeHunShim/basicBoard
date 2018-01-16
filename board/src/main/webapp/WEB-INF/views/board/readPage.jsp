@@ -29,7 +29,37 @@ $(document).ready(function(){
 		formObj.attr("method","get");
 		formObj.submit();
 	});
-	
+	//댓글 등록처리 
+	$("#replyAddBtn").on("click",function(){
+		var replyerObj = $("#newReplyWriter");
+		var replytextObj = $("#newReplyText");
+		
+		var replyer = replyerObj.val();
+		var replytext= replytextObj.val();
+		
+		$.ajax({
+			type:"post",
+			url:"/replies/",
+			headers:{
+				"Content-Type":"application/json",
+				"X-Http-Method-Override":"POST"
+			},
+			dataType:"text",
+			data:JSON.stringify({bno:bno, replyer:replyer,replytext:replytext}),
+			success:function(result){
+				console.log("result:"+result);
+				if(result=="SUCCESS"){
+					alert("등록에 성공했습니다.");
+					relyPage=1; //페이지 번호를 다시 1로 초기화
+					getPage("/replies/"+bno+"/"+replyPage); // 조건에 맞는 (bno, replyPage)페이지 정보
+					//다시 초기화 
+					replyerObj.val("");
+					replytextObj.val("");
+				}
+			}	
+		});
+	});
+		//페이징 처리 글 번호에 맞는 댓글 가지고 오는 부분 
 	$("#repliesDiv").on("click", function() {
 
 		if ($(".timeline li").size() > 1) {
@@ -39,17 +69,74 @@ $(document).ready(function(){
 
 	});
 
-
+		//페이징 처리(하단부)
 	$(".pagination").on("click", "li a", function(event){
 		
 		event.preventDefault();
 		
-		replyPage = $(this).attr("href");
+		replyPage = $(this).attr("href");	
 		
 		getPage("/replies/"+bno+"/"+replyPage);
 		
 	});
+		//댓글 수정에 페이지 modal 여는 부분 
+	$(".timeline").on("click",".replyLi", function(){
+		var reply =$(this); //해당 replyLi
+		
+		$("#replytext").val(reply.find(".timeline-body").text());
+		$(".modal-title").html(reply.attr("data-rno")); //<h4>태그의 modal-title에 rno 값을 추가 
+		
+	});
+		//수정버튼 클릭 이벤트
+	$("#replyModBtn").on("click",function(){
+		//각각의 해당 데이터를 뽑아옴
+		var rno= $(".modal-title").html();
+		var replytext=$("#replytext").val();
+		
+		$.ajax({
+			type:"put",
+			url:"/replies/"+rno,
+			headers:{
+				"Content-Type":"application/json",
+				"X-Http-Method-Override":"PUT"
+			},
+			dataType:"text",
+			data:JSON.stringify({rno:rno,replytext:replytext}),
+			success:function(result){
+				if(result=="SUCCESS"){
+					console.log("result"+result);
+					alert("수정되었습니다.");
+					getPage("/replies/"+bno+"/"+replyPage);
+				}
+			}
+		});
+	});	
+	//댓글 삭제
+	$("#replyDelBtn").on("click",function(){
+		var rno=$(".modal-title").html();
+		var replytext=$("#replytext").val();
+		
+		$.ajax({
+			type:"delete",
+			url:"/replies/"+rno,
+			headers:{
+				"Content-Type":"application/json",
+				"X-Http-Method-Override":"DELETE"
+			},
+			dataType:"text",
+			success:function(result){
+				console.log("result:"+result);
+				if(result=="SUCCESS"){
+					alert("삭제되었습니다.");
+					getPage("/replies/"+bno+"/"+replyPage);
+				}
+			}
+		});
+	});
+	
+	
 });
+//handlebars 사용해서 li태그 반복
 </script>
 <script id="template" type="text/x-handlebars-template">
 {{#each .}}
@@ -162,10 +249,10 @@ var printPaging = function(pageMaker, target) {
 					<textarea class="form-control" placeholder="reply_text" rows="3" id="newReplyText"></textarea>
 			</div>
 			<div class="box-footer">
-				<button type="submit" class="btn btn-primary" id="replyAddBtn">댓글등록하기</button>
+				<button type="submit" class="btn btn-info" id="replyAddBtn">댓글등록하기</button>
 			</div>
 		</div>
-		 <!--댓글 페이징 처리--> 
+		 <!--댓글 페이징 처리(위에 handlebar 를 이용해서  li태그 목록을 가지고 오는 부분 --> 
 		<ul	class="timeline">
 			<li class="time-label" id="repliesDiv"><span class="bg-green">댓글 목록</span></li>
 		</ul>
@@ -173,6 +260,25 @@ var printPaging = function(pageMaker, target) {
 		<div class="text-center">
 			<ul id="pagination" class="pagination pagination-sm no-margin">
 			</ul>
+		</div>
+	</div>
+</div>
+<!-- 댓글 수정 처리 부분 (modal) -->
+<div id="modifyModal" class="modal modal-primary fade" role="dialog">
+	<div class= modal-dialog>
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title"></h4>
+			</div>
+			<div class="modal-body" data-rno>
+			<p><textarea id="replytext" class="form-control" placeholder="reply_text"></textarea></p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-info" id="replyModBtn">수정</button>
+				<button type="button" class="btn btn-red" style="background-color:pink;"id="replyDelBtn">삭제</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+			</div>
 		</div>
 	</div>
 </div>

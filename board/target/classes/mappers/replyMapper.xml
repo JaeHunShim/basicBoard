@@ -19,7 +19,7 @@
 </update>
 	<!-- 댓글 삭제 -->
 <delete id="delete">
-	delete from tbl_reply where rno=#{rno};
+	delete from tbl_reply where rno=#{rno}
 </delete>
 	<!--  댓글 페이징 처리  -->
 <select id="listPage" resultType="ReplyVO">
