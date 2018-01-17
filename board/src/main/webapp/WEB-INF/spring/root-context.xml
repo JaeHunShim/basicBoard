@@ -37,9 +37,14 @@
 		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
 	</bean>
 	<!-- dao,service 패키지의 클래스들을 자동으로 빈객체로 생성  -->
+	
 	<context:component-scan base-package="org.board.persistence"></context:component-scan>
+	
 	<context:component-scan base-package="org.board.service"></context:component-scan>
+	
+	<context:component-scan base-package="org.board.aop"></context:component-scan>
 	<!-- Proxy객체 생성을 위해서 잡아줌 -->
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+	<aop:config></aop:config>
 </beans>
 
