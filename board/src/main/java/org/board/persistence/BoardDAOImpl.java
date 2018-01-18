@@ -1,6 +1,8 @@
 package org.board.persistence;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -63,17 +65,30 @@ public class BoardDAOImpl implements BoardDAO {
 	public List<BoardVO> listCriteria(Criteria cri) throws Exception {
 		
 		return sqlSession.selectList(namespace+".listCriteria", cri);
-	}
+	} 
 	//전체 개시물 즉 totalCount가지고오는 dao
 	@Override
 	public int countPaging(Criteria cri) throws Exception {
 		
 		return sqlSession.selectOne(namespace+".countPaging",cri);
 	}
-	/*@Override
-	public void addCount(int bno) throws Exception {
+	// 댓글 갯수 업데이트 (파라미터가 두개 이상이기때문에 map으로  받아줌)
+	@Override
+	public void updateReplyCnt(Integer bno, int amount) throws Exception{
 		
-		sqlSession.insert(namespace+".addCount",bno);
-	}*/
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		map.put("bno", bno);
+		map.put("amount", amount);
+		
+		sqlSession.update(namespace+".updateReplyCnt", map);
+		
+	}
+	//조회수 증가시시키기
+	public void updateViewCnt(Integer bno) throws Exception{
+		
+		sqlSession.update(namespace+".updateViewCnt", bno);
+		
+	}
 
 }

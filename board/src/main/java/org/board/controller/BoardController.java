@@ -125,6 +125,7 @@ public class BoardController {
 	//페이징 처리 연습(생성자를 아직 사용하지 않았기 때문에 실행하게 되면 default인 1,10에 해당하는 데이터들이 나옴
 	@RequestMapping(value="/listCri", method=RequestMethod.GET)
 	public void listAll(Criteria cri,Model model) throws Exception{
+	
 		logger.info("show list Paging Criteria................");
 		
 		model.addAttribute("list", boardService.listCriteria(cri));
@@ -132,10 +133,11 @@ public class BoardController {
 	//페이징 처리한 리스트 목록 보여주는 페이지 
 	@RequestMapping(value="/listPage",method=RequestMethod.GET)
 	public void listPage(@ModelAttribute("cri") Criteria cri,Model model) throws Exception{
-		
+			
 		logger.info(cri.toString());
 		
 		model.addAttribute("list",boardService.listCriteria(cri));
+		
 		PageMaker pageMaker=new PageMaker();
 		pageMaker.setCri(cri);
 		//pageMaker.setTotalCount(131); //연습으로 총 개시물을 131개로 잡아주고 잘 돌아가는지 해봄

@@ -10,7 +10,16 @@ public class BoardVO {
 	private String writer;
 	private Date regdate;
 	private int viewcnt;
+	private int replycnt;// 메인화면에서 댓글갯수를 보여지게 하기 위해서 사용
 	
+	
+	
+	public int getReplycnt() {
+		return replycnt;
+	}
+	public void setReplycnt(int replycnt) {
+		this.replycnt = replycnt;
+	}
 	public Integer getBno() {
 		return bno;
 	}
@@ -47,15 +56,13 @@ public class BoardVO {
 	public void setViewcnt(int viewcnt) {
 		this.viewcnt = viewcnt;
 	}
-	
 	@Override
 	public String toString() {
 		return "BoardVO [bno=" + bno + ", title=" + title + ", content=" + content + ", writer=" + writer + ", regdate="
-				+ regdate + ", viewcnt=" + viewcnt + ", getBno()=" + getBno() + ", getTitle()=" + getTitle()
-				+ ", getContent()=" + getContent() + ", getWriter()=" + getWriter() + ", getRegdate()=" + getRegdate()
-				+ ", getViewcnt()=" + getViewcnt() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
-				+ ", toString()=" + super.toString() + "]";
+				+ regdate + ", viewcnt=" + viewcnt + ", replycnt=" + replycnt + ", getReplycnt()=" + getReplycnt()
+				+ ", getBno()=" + getBno() + ", getTitle()=" + getTitle() + ", getContent()=" + getContent()
+				+ ", getWriter()=" + getWriter() + ", getRegdate()=" + getRegdate() + ", getViewcnt()=" + getViewcnt()
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
+				+ "]";
 	}
-	
-	
 }

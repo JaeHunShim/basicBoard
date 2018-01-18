@@ -36,7 +36,7 @@ public class SampleAdvice {
 	@Around("execution(* org.board.service.ReplyService*.*(..))")
 	public Object replyServiceLog(ProceedingJoinPoint pjp) throws Throwable{
 		long startTime=System.currentTimeMillis();
-		logger.info("=========================ReplyService Log End================================================");
+		logger.info("=========================ReplyService Log Start================================================");
 		logger.info(Arrays.toString(pjp.getArgs()));
 		
 		Object result= pjp.proceed();

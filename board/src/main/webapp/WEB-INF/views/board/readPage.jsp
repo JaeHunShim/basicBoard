@@ -183,6 +183,8 @@ function getPage(pageInfo) {
 		printPaging(data.pageMaker, $(".pagination"));
 
 		$("#modifyModal").modal('hide');
+		//댓글이 보여지는것은 board에서 가지고 오지만 댓글을 삭제 했을때는 ajax를 통한 처리를 했기때문에 totalCount에 대한 정보를 가지고 와야한다. 
+		$("#replycntStrong").html("["+data.pageMaker.totalCount+"]");
 
 	});
 }
@@ -254,7 +256,8 @@ var printPaging = function(pageMaker, target) {
 		</div>
 		 <!--댓글 페이징 처리(위에 handlebar 를 이용해서  li태그 목록을 가지고 오는 부분 --> 
 		<ul	class="timeline">
-			<li class="time-label" id="repliesDiv"><span class="bg-green">댓글 목록</span></li>
+			<li class="time-label" id="repliesDiv"><span class="bg-green">댓글 목록
+			<strong id="replycntStrong">[${boardVO.replycnt}]</strong></span></li>
 		</ul>
 		<!-- 댓글 하단부분(버튼)-->
 		<div class="text-center">

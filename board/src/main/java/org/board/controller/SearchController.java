@@ -23,8 +23,7 @@ public class SearchController { //기존의 boardController와 동일 함
 	BoardService boardService;
 	
 	@RequestMapping(value="/list",method=RequestMethod.GET)
-	public void listPage(@ModelAttribute("cri") SeachCriteria cri,Model model) throws Exception{
-		
+	public void listPage(@ModelAttribute("cri") SeachCriteria cri,Model model) throws Exception{	
 		logger.info(cri.toString());
 		
 		model.addAttribute("list",boardService.listCriteria(cri));

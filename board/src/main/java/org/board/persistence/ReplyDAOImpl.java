@@ -59,5 +59,11 @@ public class ReplyDAOImpl implements ReplyDAO {
 		
 		return sqlSession.selectOne(namespace+".count",bno);
 	}
+	//댓글 삭제시에 해당 게시물의 번호를 가져오는 부분 
+	@Override
+	public int getBno(Integer rno) throws Exception {
+		
+		return sqlSession.selectOne(namespace+".getBno", rno);
+	}
 
 }

@@ -19,9 +19,11 @@ public interface BoardDAO {
 	//페이징 처리관련 기능
 	public List<BoardVO>listPage(int page) throws Exception;
 	//BoardDAO에  리스트를 출력하는 부분
-	public List<BoardVO> listCriteria(Criteria cri) throws Exception;
+	public List<BoardVO> listCriteria(Criteria cri) throws Exception; 
 	//전체 개시물 즉 totalCount가지고오는 dao
 	public int countPaging(Criteria cri) throws Exception;
-	//게시물 카운트 올리기
-	//public void addCount(int bno) throws Exception;
+	//댓글 갯수 증가시킴
+	public void updateReplyCnt(Integer bno, int amount) throws Exception;
+	//조회수 증가 시키기 
+	public void updateViewCnt(Integer bno) throws Exception;
 }

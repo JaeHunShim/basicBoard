@@ -21,5 +21,4 @@ public interface BoardService {
 	//전체 개시물 숫자 구하기
 	public int listCountCriteria(Criteria cri) throws Exception;
 	
-	//public void addCount(int bno) throws Exception;
 }

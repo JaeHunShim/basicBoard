@@ -9,7 +9,7 @@
 	</insert>
 	<!-- 해당게시물의 상세보기 -->
 	<select id="read" resultType="org.board.domain.BoardVO">
-		select bno,title,content,writer,regdate,viewcnt
+		select bno,title,content,writer,regdate,viewcnt,replycnt
 		from tbl_board
 		where bno=#{bno}
 	</select>
@@ -44,11 +44,11 @@
 		limit #{page},10	
 		]]>
 	</select>
-	<!--  페이징 처리를  가변적으로 늘려서 할수 있는 쿼리 -->
+	<!--  페이징 처리를  가변적으로 늘려서 할수 있는 쿼리  기존의 listAll 업그레이드하고 replycnt를 넣음으로써 댓글갯수보여지게함 -->
 	<select id="listCriteria" resultType="BoardVO">
 		<![CDATA[
 		select
-			bno,title,content,writer,regdate,viewcnt
+			bno,title,content,writer,regdate,viewcnt,replycnt 
 		from
 			tbl_board
 		where bno>0
@@ -59,7 +59,12 @@
 	<select id="countPaging" resultType="int">
 		<![CDATA[select count(bno) from tbl_board where bno>0]]>
 	</select>
-	<!-- <update id="addCount">
-		update tbl_board set viewcnt= viewcnt+1 where bno=#{bno}
-	</update> -->
+	<!-- 댓글 갯수 증가시키는 부분  -->
+	<update id="updateReplyCnt">
+		update tbl_board set replycnt=replycnt+#{amount} where bno=#{bno}
+	</update>
+	<!-- 조회수 증가시키기 -->
+	<update id="updateViewCnt">
+		update tbl_board set viewcnt=viewcnt+1 where bno=#{bno}
+	</update>
 </mapper>
