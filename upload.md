@@ -17,9 +17,14 @@
 * ### 상세조회 페이지에서 업로드한 파일 보는 방식
   * 글을 조회했을때 데이터베이스에서 조회한걸 가지고 Ajax를 이용해서 현재 게시물의 첨부파일을 별도로 가지고오는 방법사용
 ---
+* ### Source & View(controller와 util파일은 springStudy와 동일 )
+
+  * #### Mapper
+    ![mapper](./img/업로드매퍼.png)
+---
 * ### 오류와 해결 방법
   * hadlebar 을 못잡아줄때  생기는 오류
     * You must pass a string or Handlebars AST to Handlebars.compile. You passed undefined
   * 해결방법
     * var template=Handlebars.compile($("#templateAttach").html());
-    이부분을 제일 밑으로 잡아준다. 
+    이부분을 제일 밑으로 잡아준다.
