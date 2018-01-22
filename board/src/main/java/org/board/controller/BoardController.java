@@ -41,7 +41,7 @@ public class BoardController {
 		rttr.addFlashAttribute("msg","success"); //redirct할때 같이 보냄  model과는 다르게 uri상에서는 보이지 않음  
 		logger.info("rttr 메세지........................"+rttr.getFlashAttributes());
 		//return "/board/success";
-		return "redirect:/board/listAll";
+		return "redirect:/sboard/list";
 	}
 	//페이징 처리 안했을때 전체 결봐물 받아와서 뿌려주는컨트롤러
 	@RequestMapping(value="/listAll",method=RequestMethod.GET)

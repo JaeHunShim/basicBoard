@@ -3,10 +3,38 @@
 <%@ page session="false" %>
 <%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="../include/header.jsp" %>
-<script src="/resources/plugins/jQuery/jQuery-2.1.4.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+<style type="text/css">
+.popup {
+	position: absolute;
+}
 
-<script>
+.back {
+	background-color: gray;
+	opacity: 0.5;
+	width: 100%;
+	height: 300%;
+	overflow: hidden;
+	z-index: 1101;
+}
+
+.front {
+	z-index: 1110;
+	opacity: 1;
+	boarder: 1px;
+	margin: auto;
+}
+
+.show {
+	position: relative;
+	max-width: 1200px;
+	max-height: 800px;
+	overflow: auto;
+}
+</style>
+<script src="/resources/plugins/jQuery/jQuery-2.1.4.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js" type="text/javascript"></script> <!-- 템플릿 사용해서 첨부파일 밑에 보이는 템플릿 사용 -->
+<script type="text/javascript" src="/resources/dist/js/upload.js"></script>
+<script type="text/javascript">
 
 $(document).ready(function(){
 
@@ -133,31 +161,11 @@ $(document).ready(function(){
 			}
 		});
 	});
-	
-	
 });
-//handlebars 사용해서 li태그 반복
-</script>
-<script id="template" type="text/x-handlebars-template">
-{{#each .}}
-<li class="replyLi" data-rno={{rno}}>
-<i class="fa fa-comments bg-blue"></i>
- <div class="timeline-item" >
-  <span class="time">
-    <i class="fa fa-clock-o"></i>{{prettifyDate regdate}}</span>
-  <h3 class="timeline-header"><strong>{{rno}}</strong> -{{replyer}}</h3>
-  <div class="timeline-body">{{replytext}} </div>
-    <div class="timeline-footer">
-     <a class="btn btn-primary btn-xs" 
-	    data-toggle="modal" data-target="#modifyModal">Modify</a>
-    </div>
-  </div>			
-</li>
-{{/each}}
 </script>
 
 <!-- 날짜 출력 함수 부분  -->
-<script>
+<script type="text/javascript">
 Handlebars.registerHelper("prettifyDate", function(timeValue) {
 	var dateObj = new Date(timeValue);
 	var year = dateObj.getFullYear();
@@ -183,7 +191,7 @@ function getPage(pageInfo) {
 		printPaging(data.pageMaker, $(".pagination"));
 
 		$("#modifyModal").modal('hide');
-		//댓글이 보여지는것은 board에서 가지고 오지만 댓글을 삭제 했을때는 ajax를 통한 처리를 했기때문에 totalCount에 대한 정보를 가지고 와야한다. 
+		//댓글이 보여지는것은 board에서 가지고 오지만 댓글을 삭제 했을때는 ajax를 통한 처리를 했기때문에 totalCount에 대한 정보를 가지고 와야한다
 		$("#replycntStrong").html("["+data.pageMaker.totalCount+"]");
 
 	});
@@ -207,12 +215,36 @@ var printPaging = function(pageMaker, target) {
 	}
 	target.html(str);
 }
-
-
-
-
+//썸네일 사진을 클릭했을시에 원본 사진을 크게 보게 하는 부분
+$(".uploadedList").on("click",".mailbox-attachment-info a",function(event){
+	
+	var fileLink=$(this).attr("href");
+	
+	if(checkImageType(fileLink)){ //이미지파일일 경우 원본 파일 추가 
+		
+		event.preventDefault();
+		
+		var imgTag=$("#popup_img");
+		imgTag.attr("src",fileLink);
+		
+		console.log(imgTag.attr("src"));
+		
+		$(".popup").show('slow');
+		imgTag.addClass("show");
+	}
+});
+//크게된 원본파일을 클릭시에 숨겨지는 효과 
+$("#popup_img").on("click",function(){
+	$(".popup").hide('slow');
+});
 </script>
-<form role="form" method="post"> <!-- name이 파라미터로 넘어가는 거고 리턴으로 criteria 객체로 리턴받은값이  value -->
+<!-- 이미지 클릭시에 큰화면으로 보여주게 하는 부분  -->
+<div class="popup back" style="display: none;"></div>
+	<div id="popup_front" class="popup front" style="display: none;">
+	<img id="popup_img">
+	</div>
+	
+<form role="form" method="post" action=""> <!-- name이 파라미터로 넘어가는 거고 리턴으로 criteria 객체로 리턴받은값이  value -->
 	<input type="hidden" name="bno" value="${boardVO.bno}">
 	<input type="hidden" name="page" value="${cri.page}">
 	<input type="hidden" name="perPageNum" value="${cri.perPageNum}">
@@ -224,18 +256,22 @@ var printPaging = function(pageMaker, target) {
 	</div>
 	<div class="form-group">
 		<label for="examplePassword1">Content</label>
-		<textarea class="form-control" name="content" rows="3" readonly="readonly">${boardVO.content}</textarea>
+		<textarea class="form-control" name="content" rows="3" readonly="readonly" cols="">${boardVO.content}</textarea>
 	</div>
 	<div class="form-group">
 		<label for="exampleInputEmail1">Writer</label>
 		<input type="text" class="form-control" value="${boardVO.writer}" readonly="readonly">
 	</div>
 </div>
+<!-- 파일 업로드정보가 보여지는 부분  -->
+<ul class="mailbox-attachments clearfix uploadedList"></ul>
+
 <div class="box-footer">
 	<button type="submit" class="btn btn-warning">Modify</button>
 	<button type="submit" class="btn btn-danger">Remove</button>
 	<button type="submit" class="btn btn-primary">ListAll</button>
 </div>
+
 
 <!-- 댓글 부분  -->
 <div class="row">
@@ -248,7 +284,7 @@ var printPaging = function(pageMaker, target) {
 				<label for="newReplyWriter">글쓴이</label>
 					<input class="form-control" type="text" placeholder="user_id" id="newReplyWriter">
 				<label for="newReplyText"> 댓글내용</label>
-					<textarea class="form-control" placeholder="reply_text" rows="3" id="newReplyText"></textarea>
+					<textarea class="form-control" placeholder="reply_text" rows="3" id="newReplyText" cols=""></textarea>
 			</div>
 			<div class="box-footer">
 				<button type="submit" class="btn btn-info" id="replyAddBtn">댓글등록하기</button>
@@ -268,22 +304,68 @@ var printPaging = function(pageMaker, target) {
 </div>
 <!-- 댓글 수정 처리 부분 (modal) -->
 <div id="modifyModal" class="modal modal-primary fade" role="dialog">
-	<div class= modal-dialog>
+	<div class= "modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h4 class="modal-title"></h4>
 			</div>
 			<div class="modal-body" data-rno>
-			<p><textarea id="replytext" class="form-control" placeholder="reply_text"></textarea></p>
+			<p><textarea id="replytext" class="form-control" placeholder="reply_text" cols="" rows=""></textarea></p>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-info" id="replyModBtn">수정</button>
-				<button type="button" class="btn btn-red" style="background-color:pink;"id="replyDelBtn">삭제</button>
+				<button type="button" class="btn btn-red" style="background-color: pink;"id="replyDelBtn">삭제</button>
 				<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
 			</div>
 		</div>
 	</div>
 </div>
+<!-- 파일 업로드 처리도 handlebars 사용해서 처리  -->
+<script id="templateAttach" type="text/x-handlebars-template">
+<li data-src='{{fullName}}'>
+	<span class="mailbox-attachment-icon has-img">
+		<img src="{{imgsrc}}" alt="Attachment">
+	</span>
+	<div class="mailbox-attachment-info">
+		<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
+	</div>
+</li>
+</script>
+<!--  handlebars 사용해서 li태그 반복 , 댓글 처리 할때 템플릿을 사용해서 li태그와 안에 데이터를 반복해서 처리--> 
+<script id="template" type="text/x-handlebars-template">
+{{#each .}}
+<li class="replyLi" data-rno={{rno}}>
+<i class="fa fa-comments bg-blue"></i>
+ <div class="timeline-item" >
+  <span class="time">
+    <i class="fa fa-clock-o"></i>{{prettifyDate regdate}}</span>
+  <h3 class="timeline-header"><strong>{{rno}}</strong> -{{replyer}}</h3>
+  <div class="timeline-body">{{replytext}} </div>
+    <div class="timeline-footer">
+     <a class="btn btn-primary btn-xs" 
+	    data-toggle="modal" data-target="#modifyModal">Modify</a>
+    </div>
+  </div>			
+</li>
+{{/each}}
+</script>
+
+<script type="text/javascript">
+var bno=${boardVO.bno};
+<!-- 만들어놓은 핸드바 템플릿을 가지고온후에  핸드바템플릿에 맞게 컴파일한후에 list 형태로 가지고온 데이터를 바인딩후 DOM객체로 만들어줌 -->
+var template=Handlebars.compile($("#templateAttach").html());
+
+$.getJSON("/sboard/getAttach/"+bno,function(list){
 	
+	$(list).each(function(){
+		
+		var fileInfo=getFileInfo(this);
+		
+		var html=template(fileInfo);
+		
+		$(".uploadedList").append(html);
+	});
+});
+</script>
 <%@ include file="../include/footer.jsp" %>

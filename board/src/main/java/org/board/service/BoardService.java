@@ -20,5 +20,7 @@ public interface BoardService {
 	public List<BoardVO> listCriteria(Criteria cri) throws Exception;
 	//전체 개시물 숫자 구하기
 	public int listCountCriteria(Criteria cri) throws Exception;
+	//상세보기에서 파일 업로드 정보보기
+	public List<String> getAttech(Integer bno) throws Exception;
 	
 }

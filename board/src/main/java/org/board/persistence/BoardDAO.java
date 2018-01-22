@@ -26,4 +26,8 @@ public interface BoardDAO {
 	public void updateReplyCnt(Integer bno, int amount) throws Exception;
 	//조회수 증가 시키기 
 	public void updateViewCnt(Integer bno) throws Exception;
+	//파일 업로드 등ㄺ
+	public void addAttach(String fullName) throws Exception;
+	//파일 업로드한 정보 가지고오기 (상세보기에서 보기 위해서)
+	public List<String>getAttach(Integer bno) throws Exception;
 }

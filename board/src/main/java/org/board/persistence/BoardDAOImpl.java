@@ -90,5 +90,18 @@ public class BoardDAOImpl implements BoardDAO {
 		sqlSession.update(namespace+".updateViewCnt", bno);
 		
 	}
+	// 파일 업로드 bno의 경우는 last-insert-id 로 받아오니가 파라미터가 필요없음 
+	@Override
+	public void addAttach(String fullName) throws Exception {
+		
+		sqlSession.insert(namespace+".addAttach",fullName);
+		
+	}
+	// 상세피이지에서 파일 업로드 정보 보기 
+	@Override
+	public List<String> getAttach(Integer bno) throws Exception {
+		
+		return sqlSession.selectList(namespace+".getAttach", bno);
+	}
 
 }

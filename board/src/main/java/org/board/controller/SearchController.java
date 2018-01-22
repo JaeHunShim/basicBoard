@@ -1,5 +1,7 @@
 package org.board.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.board.domain.PageMaker;
@@ -10,8 +12,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/sboard/*")
@@ -33,5 +37,13 @@ public class SearchController { //기존의 boardController와 동일 함
 		pageMaker.setTotalCount(boardService.listCountCriteria(cri));
 		
 		model.addAttribute("pageMaker",pageMaker);
+	}
+	// Ajax로 업로드파일 정보 불러오기  url에서 (pathvariable 로 bno를 받아옴)
+	
+	@RequestMapping("/getAttach/{bno}")
+	@ResponseBody
+	public List<String> getAttach(@PathVariable("bno")Integer bno) throws Exception {
+		
+		return boardService.getAttech(bno);
 	}
 }

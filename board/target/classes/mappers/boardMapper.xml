@@ -67,4 +67,12 @@
 	<update id="updateViewCnt">
 		update tbl_board set viewcnt=viewcnt+1 where bno=#{bno}
 	</update>
+	<!-- 파일 업로드  last-insert-id:insert 이후 에 생긴 bno 값을 바로 받아오게 처리 -->
+	<insert id="addAttach">
+		insert into tbl_attach(fullName, bno) values(#{fullName},LAST_INSERT_ID())
+	</insert>
+	<!--  상세페이지에서 파일 업로드 정보보기 -->
+	<select id="getAttach" resultType="string">
+		select fullName from tbl_attach where bno=#{bno} order by regdate
+	</select>
 </mapper>

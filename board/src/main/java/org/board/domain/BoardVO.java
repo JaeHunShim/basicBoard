@@ -1,5 +1,6 @@
 package org.board.domain;
 
+import java.util.Arrays;
 import java.util.Date;
 
 public class BoardVO {
@@ -11,9 +12,16 @@ public class BoardVO {
 	private Date regdate;
 	private int viewcnt;
 	private int replycnt;// 메인화면에서 댓글갯수를 보여지게 하기 위해서 사용
+	private String[] files; //첨부파일에 대한 정보
 	
 	
 	
+	public String[] getFiles() {
+		return files;
+	}
+	public void setFiles(String[] files) {
+		this.files = files;
+	}
 	public int getReplycnt() {
 		return replycnt;
 	}
@@ -56,13 +64,15 @@ public class BoardVO {
 	public void setViewcnt(int viewcnt) {
 		this.viewcnt = viewcnt;
 	}
+	
 	@Override
 	public String toString() {
 		return "BoardVO [bno=" + bno + ", title=" + title + ", content=" + content + ", writer=" + writer + ", regdate="
-				+ regdate + ", viewcnt=" + viewcnt + ", replycnt=" + replycnt + ", getReplycnt()=" + getReplycnt()
-				+ ", getBno()=" + getBno() + ", getTitle()=" + getTitle() + ", getContent()=" + getContent()
-				+ ", getWriter()=" + getWriter() + ", getRegdate()=" + getRegdate() + ", getViewcnt()=" + getViewcnt()
-				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
-				+ "]";
+				+ regdate + ", viewcnt=" + viewcnt + ", replycnt=" + replycnt + ", files=" + Arrays.toString(files)
+				+ ", getFiles()=" + Arrays.toString(getFiles()) + ", getReplycnt()=" + getReplycnt() + ", getBno()="
+				+ getBno() + ", getTitle()=" + getTitle() + ", getContent()=" + getContent() + ", getWriter()="
+				+ getWriter() + ", getRegdate()=" + getRegdate() + ", getViewcnt()=" + getViewcnt() + ", getClass()="
+				+ getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
 	}
+	
 }
