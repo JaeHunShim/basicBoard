@@ -1,3 +1,3 @@
-/board/src/main/webapp/resources/dist/* linguist-vendored
+board/src/main/webapp/resources/dist/* linguist-vendored
 web/template/* linguist-vendored
 web/vendor/* linguist-vendored
