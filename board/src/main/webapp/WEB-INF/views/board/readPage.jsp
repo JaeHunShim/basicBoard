@@ -34,6 +34,7 @@
 <script src="/resources/plugins/jQuery/jQuery-2.1.4.min.js" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js" type="text/javascript"></script> <!-- 템플릿 사용해서 첨부파일 밑에 보이는 템플릿 사용 -->
 <script type="text/javascript" src="/resources/dist/js/upload.js"></script>
+
 <script type="text/javascript">
 
 $(document).ready(function(){
@@ -161,6 +162,29 @@ $(document).ready(function(){
 			}
 		});
 	});
+	//게시물 삭제시에 첨부파일 삭제처리에 대한 Ajax삭제 
+	$("#removeBtn").on("click",function(){
+		// 정규식을사용해서 댓글의 갯수를 모두 가지고와서  하나라도 있으면 삭제처리를 못하게함 
+		var replyCnt=$("#replycntStrong").html().replace(/[^0-9]/g,"");
+		
+		if(replyCnt>0){
+			alert("댓글이 있는 게시물은 삭제 할수가 없습니다.");
+			
+			return;
+		}
+		var arr=[];
+		$(".uploadedList li").each(function(index){
+			//data-src의 값에 this에 해당하는 값을 push한다는 소리 
+			arr.push($(this).attr("data-src"));
+		});
+		if(arr.length>0){
+			$.post("/deleteAllFiles",{files:arr}, function(){
+				
+			});
+		}
+		formObj.attr("action","/board/removePage");
+		formObj.submit();
+	});
 });
 </script>
 
@@ -268,7 +292,7 @@ $("#popup_img").on("click",function(){
 
 <div class="box-footer">
 	<button type="submit" class="btn btn-warning">Modify</button>
-	<button type="submit" class="btn btn-danger">Remove</button>
+	<button type="submit" class="btn btn-danger" id="removeBtn">Remove</button>
 	<button type="submit" class="btn btn-primary">ListAll</button>
 </div>
 
@@ -293,6 +317,7 @@ $("#popup_img").on("click",function(){
 		 <!--댓글 페이징 처리(위에 handlebar 를 이용해서  li태그 목록을 가지고 오는 부분 --> 
 		<ul	class="timeline">
 			<li class="time-label" id="repliesDiv"><span class="bg-green">댓글 목록
+			<!-- 댓글 갯수 가지고 오는 부분 -->
 			<strong id="replycntStrong">[${boardVO.replycnt}]</strong></span></li>
 		</ul>
 		<!-- 댓글 하단부분(버튼)-->
@@ -353,7 +378,7 @@ $("#popup_img").on("click",function(){
 
 <script type="text/javascript">
 var bno=${boardVO.bno};
-<!-- 만들어놓은 핸드바 템플릿을 가지고온후에  핸드바템플릿에 맞게 컴파일한후에 list 형태로 가지고온 데이터를 바인딩후 DOM객체로 만들어줌 -->
+//만들어놓은 핸드바 템플릿을 가지고온후에  핸드바템플릿에 맞게 컴파일한후에 list 형태로 가지고온 데이터를 바인딩후 DOM객체로 만들어줌 
 var template=Handlebars.compile($("#templateAttach").html());
 
 $.getJSON("/sboard/getAttach/"+bno,function(list){

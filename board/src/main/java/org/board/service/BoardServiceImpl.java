@@ -41,17 +41,34 @@ public class BoardServiceImpl implements BoardService {
 		boardDAO.updateViewCnt(bno);
 		return boardDAO.read(bno);
 	}
-
+	//게시판 수정하는 부분(파일 처리까지 같이 처리)
+	@Transactional
 	@Override
 	public void modify(BoardVO vo) throws Exception {
 		
 		boardDAO.update(vo);
+		// 1. 현재 bno를 가지고와서 
+		Integer bno =vo.getBno();
+		// 2. 해당 bno의 파일목록을 삭제하고
+		boardDAO.deleteAttach(bno);
+		// 여기서부터는 register할때랑 똑같이 다른점은 bno를 받아온다는 점 
+		String[] files = vo.getFiles();
+		
+		if(files==null) {
+			return;
+		}	
+		for(String fileName:files) {
+				boardDAO.replaceAttach(fileName, bno);
+		}	
 	}
-
+	//게시물 삭제 할때 업로드외어있는 파일도 삭제 (데이터 베이스 내에서)
+	@Transactional
 	@Override
 	public void remove(Integer bno) throws Exception {
 		
+		boardDAO.deleteAttach(bno);
 		boardDAO.delete(bno);
+		
 	}
 
 	@Override

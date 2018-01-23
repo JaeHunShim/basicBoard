@@ -19,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -142,6 +143,34 @@ public class UploadController {
 		
 		return new ResponseEntity<String>("deleted",HttpStatus.OK);
 	}
-	
+	// 여러개의 파일 이름을 받아서 삭제 할수 있어야 하니가 배열 형태로 받는다 
+	@ResponseBody
+	@RequestMapping(value="/deleteAllFile", method=RequestMethod.POST)
+	public ResponseEntity<String> AlldeleteFile(@RequestParam("files[]") String[] files) {
+		
+		logger.info("delete_All_Files" + files);
+		//파일이 없으면 그냥 리턴 
+		if(files==null||files.length==0) {
+			
+			return new ResponseEntity<String>("deleted",HttpStatus.OK);
+		}
+		//파일이 있으면 파일이 있는만큼 file이름에 넣고 
+		for(String fileName:files) {
+				// 형식에 맞는 확장자를 추출해서 
+			String formatName=fileName.substring(fileName.lastIndexOf(".")+1);
+				// 추출한 확장자를 스프링에서 지원하는 MediaType 객체에  담고
+			MediaType mType=MediaUtils.getMediaType(formatName);
+				//먼저 원본 파일 삭제하고 , 그다음 썸네일 파일을 삭제 하고 리턴 하면 끝
+			if(mType !=null) {
+				
+				String front=fileName.substring(0, 12);
+				String end=fileName.substring(14);
+				
+				new File(uploadPath+(front+end).replace('/', File.separatorChar)).delete();
+			}
+			new File(uploadPath+fileName.replace('/', File.separatorChar)).delete();
+		}
+		return new ResponseEntity<String>("deleted",HttpStatus.OK);
+	}
 	
 }

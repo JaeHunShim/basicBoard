@@ -75,4 +75,10 @@
 	<select id="getAttach" resultType="string">
 		select fullName from tbl_attach where bno=#{bno} order by regdate
 	</select>
+	<delete id="deleteAttach">
+		delete from tbl_attach where bno=#{bno}
+	</delete>
+	<insert id="replaceAttach">
+		insert into(fullName,bno)values(#{fullName},#{bno})
+	</insert>
 </mapper>

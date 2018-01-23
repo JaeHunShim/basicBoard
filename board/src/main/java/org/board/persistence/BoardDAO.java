@@ -30,4 +30,9 @@ public interface BoardDAO {
 	public void addAttach(String fullName) throws Exception;
 	//파일 업로드한 정보 가지고오기 (상세보기에서 보기 위해서)
 	public List<String>getAttach(Integer bno) throws Exception;
+	//파일 수정 1(데이터베이스 내에서 삭제)
+	public void deleteAttach(Integer bno) throws Exception;
+	//파일 삭제한후에 다시 등록 
+	public void replaceAttach(String fileName, Integer bno) throws Exception;
+	
 }

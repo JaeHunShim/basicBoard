@@ -103,5 +103,23 @@ public class BoardDAOImpl implements BoardDAO {
 		
 		return sqlSession.selectList(namespace+".getAttach", bno);
 	}
+	//파일삭제(수정하기 위해서)
+	@Override
+	public void deleteAttach(Integer bno) throws Exception {
+		
+		sqlSession.delete(namespace+".deleteAttach",bno);
+		
+	}
+	//파일 삭제한후에 다시 insert하는 부분
+	@Override
+	public void replaceAttach(String fileName, Integer bno) throws Exception {
+		
+		Map<String,Object> map= new HashMap<String,Object>();
+		
+		map.put("fileName", fileName);
+		map.put("bno", bno);
+		
+		sqlSession.insert(namespace+".replaceAttach", map);		
+	}
 
 }
