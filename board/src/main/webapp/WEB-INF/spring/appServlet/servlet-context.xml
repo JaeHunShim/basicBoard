@@ -32,5 +32,13 @@
 		<beans:constructor-arg value="D:\\image\\upload">
 		</beans:constructor-arg>
 	</beans:bean>
-	
+	<!-- 로그인 관련 인터셉터 -->
+	<beans:bean id="loginInterceptor" class="com.board.interceptor.LoginInterceptor"></beans:bean>
+	<!--  인터셉터 매핑 잡아줌  -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/user/loginPost"/>
+			<beans:ref bean="loginInterceptor"/>
+		</interceptor>
+	</interceptors>
 </beans:beans>
