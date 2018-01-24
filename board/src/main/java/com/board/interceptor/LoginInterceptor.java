@@ -1,5 +1,6 @@
 package com.board.interceptor;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -30,9 +31,24 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 			
 			logger.info("new login success");
 			session.setAttribute(LOGIN, userVO); //session에 vo객체를 다 넣어놓음 
-			response.sendRedirect("/");
+			
+			if(request.getParameter("useCookie") != null) {
+				
+				logger.info("remember id---------------");
+				Cookie loginCookie=new Cookie("loginCookie",session.getId()); //session 에 있는 아이디를 가져와서 쿠키객체를 생성한다(loginCookie라는 키로)
+				loginCookie.setPath("/");
+				loginCookie.setMaxAge(60*60*24*7); // 60초*60분*24시간*7일 = 7일간 쿠키유지
+			
+				response.addCookie(loginCookie); //생성한 쿠키를  response에 담아서 보낸다
+			}
+			//세션의 정보를 가지고와서 dest 에 담고 
+			//response.sendRedirect("/");
+			Object dest=session.getAttribute("dest");
+			//세션에 정보가 있다면 해당 url+query 로 이동하고 세션에 정보가 없으면 루트경로로 이동 
+			response.sendRedirect(dest !=null?(String)dest:"/");
 		}
 	}
+	//세션을 날리는 부분 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response,Object handler) throws Exception{
 		
@@ -40,7 +56,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		
 		if(session.getAttribute(LOGIN) != null) {
 			
-			logger.info("login data before");
+			logger.info("clear login data before");
 			session.removeAttribute(LOGIN); // session에 저장되어있는 데이터가 있으면 삭제 하기 
 		}
 		

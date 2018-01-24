@@ -1,13 +1,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ page session="false" %>
 <%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="../include/header.jsp" %>
 <style type="text/css">
 .popup {
 	position: absolute;
 }
-
 .back {
 	background-color: gray;
 	opacity: 0.5;
@@ -16,14 +14,12 @@
 	overflow: hidden;
 	z-index: 1101;
 }
-
 .front {
 	z-index: 1110;
 	opacity: 1;
 	boarder: 1px;
 	margin: auto;
 }
-
 .show {
 	position: relative;
 	max-width: 1200px;
@@ -261,6 +257,16 @@ $(".uploadedList").on("click",".mailbox-attachment-info a",function(event){
 $("#popup_img").on("click",function(){
 	$(".popup").hide('slow');
 });
+//댓글 수정할수 없게 버튼 hidden (Handlebar를 사용해서 했기때문에 )
+Handlebars.registerHelper("eqReplyer",function(replyer,block){
+	
+	var accum='';
+	if(replyer=="${login.uid}"){ //session에 있는 아이디와 댓글단 replyer와 일치하면 block이 생기게 함 
+		
+		accum +=block.fn();
+	}
+	return accum;
+});
 </script>
 <!-- 이미지 클릭시에 큰화면으로 보여주게 하는 부분  -->
 <div class="popup back" style="display: none;"></div>
@@ -291,9 +297,12 @@ $("#popup_img").on("click",function(){
 <ul class="mailbox-attachments clearfix uploadedList"></ul>
 
 <div class="box-footer">
-	<button type="submit" class="btn btn-warning">Modify</button>
-	<button type="submit" class="btn btn-danger" id="removeBtn">Remove</button>
-	<button type="submit" class="btn btn-primary">ListAll</button>
+	<!-- 로그인한 사용자일 경우에만 수정 삭제만  -->
+	<c:if test="${login.uid==boardVO.writer }">
+		<button type="submit" class="btn btn-warning">Modify</button>
+		<button type="submit" class="btn btn-danger" id="removeBtn">Remove</button>
+	</c:if>
+		<button type="submit" class="btn btn-primary">Go List</button>
 </div>
 
 
@@ -304,6 +313,8 @@ $("#popup_img").on("click",function(){
 			<div class="box-header">
 				<h3 class="box-title">댓글 등록</h3>
 			</div>
+			<!-- 세션에 정보가 없다면 댓글달수 없게 함  -->
+			<c:if test="${not empty login}">
 			<div class="box-body">
 				<label for="newReplyWriter">글쓴이</label>
 					<input class="form-control" type="text" placeholder="user_id" id="newReplyWriter">
@@ -313,6 +324,13 @@ $("#popup_img").on("click",function(){
 			<div class="box-footer">
 				<button type="submit" class="btn btn-info" id="replyAddBtn">댓글등록하기</button>
 			</div>
+			</c:if>
+			<!-- 댓글을 보고 싶으면 로그인 화면으로 매핑 할수 있게 처리  -->
+			<c:if test="${empty login}">
+				<div class="box-body">
+					<div><a href="/user/login">Login Please</a></div>
+				</div>
+			</c:if>
 		</div>
 		 <!--댓글 페이징 처리(위에 handlebar 를 이용해서  li태그 목록을 가지고 오는 부분 --> 
 		<ul	class="timeline">
@@ -358,6 +376,7 @@ $("#popup_img").on("click",function(){
 </li>
 </script>
 <!--  handlebars 사용해서 li태그 반복 , 댓글 처리 할때 템플릿을 사용해서 li태그와 안에 데이터를 반복해서 처리--> 
+<!--session에 있는 사용자 정보와 댓글을 단사람의 아이디와 일치 하지 않으면 수정할수 없게 설정{{eqReplyer}}--> 
 <script id="template" type="text/x-handlebars-template">
 {{#each .}}
 <li class="replyLi" data-rno={{rno}}>
@@ -368,8 +387,10 @@ $("#popup_img").on("click",function(){
   <h3 class="timeline-header"><strong>{{rno}}</strong> -{{replyer}}</h3>
   <div class="timeline-body">{{replytext}} </div>
     <div class="timeline-footer">
-     <a class="btn btn-primary btn-xs" 
-	    data-toggle="modal" data-target="#modifyModal">Modify</a>
+		{{#eqReplyer replyer}}
+     	<a class="btn btn-primary btn-xs" 
+	    	data-toggle="modal" data-target="#modifyModal">Modify</a>
+		{{/eqReplyer}}
     </div>
   </div>			
 </li>

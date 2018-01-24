@@ -1,5 +1,4 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
 <%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="../include/header.jsp" %>
 <!-- <meta http-equiv="Content-Type" content="text/html;charset=utf-8" /> -->
@@ -24,7 +23,9 @@
 	</div>
 	<div class="form-group">
 		<label for="exmpleInputEmail">Writer</label>
-		<input type="text" name="writer" class="form-control" placeholder="Enter Writer">
+		<!-- <input type="text" name="writer" class="form-control" placeholder="Enter Writer"> -->
+		<!-- 세션에 저장되어있는 아이디를 받아와서 사용 -->
+		<input type="text" name="writer" class="form-control" value="${login.uid}" readonly>
 	</div>
 		<div class="form-group">
 		<label for="exampleInputEmail1">파일을 끌어다 놓아주세요!</label>

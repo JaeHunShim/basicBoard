@@ -33,7 +33,7 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "home";
+		return "redirect:/sboard/list";
 	}
 	@RequestMapping(value="/test", method= RequestMethod.GET)
 	public void ajaxTest() {

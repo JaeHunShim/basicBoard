@@ -21,3 +21,10 @@ insert into tbl_user(uid,upw,uname)values("jaehuniya5","wognsl834","심재훈06"
 -- 유저테이블 보기
 
 select * from tbl_user;
+
+-- 세션정보를 담을 column 추가
+
+alter table tbl_user add column sessionkey varchar(50) not null default 'none';
+
+ -- 서버에서 다시 한번 유효시간안에 다시 접속했는지 판단하는데 사용하는 컬럼
+alter table tbl_user add column sessionlimit timestamp;
