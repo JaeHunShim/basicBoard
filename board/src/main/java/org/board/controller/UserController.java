@@ -1,6 +1,11 @@
 package org.board.controller;
 
+import java.util.Date;
+
 import javax.inject.Inject;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.board.domain.UserVO;
@@ -11,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.util.WebUtils;
 
 @Controller
 @RequestMapping("/user")
@@ -34,5 +40,39 @@ public class UserController {
 			return;
 		}
 		model.addAttribute("userVO", vo);
+		
+		if(dto.isUseCookie()) {
+			
+			int amount = 60*60*24*7;
+			
+			Date sessionlimit= new Date(System.currentTimeMillis()+(1000*amount));
+			
+			userService.keepLogin(vo.getUid(), session.getId(), sessionlimit);
+		}
 	}
+	//로그아웃 처리
+	@RequestMapping(value="/logout",method=RequestMethod.GET)
+	public String logout(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception{
+		
+		Object obj=session.getAttribute("login");
+		
+		if(obj !=null) {
+			UserVO vo = (UserVO)obj;
+			
+			session.removeAttribute("login");
+			session.invalidate();
+			
+			Cookie loginCookie=WebUtils.getCookie(request, "loginCookie");
+			
+			if(loginCookie != null) {
+				loginCookie.setPath("/");
+				loginCookie.setMaxAge(0);
+				response.addCookie(loginCookie);
+				userService.keepLogin(vo.getUid(), session.getId(), new Date());
+			}
+		}
+		return "redirect:/user/login";
+	}
+	
+	
 }

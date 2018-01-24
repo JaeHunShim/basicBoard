@@ -6,4 +6,12 @@
 	<select id="login" resultType="UserVO">
 		select uid,upw,uname from tbl_user where uid=#{uid} and upw=#{upw}
 	</select>
+	<!--  쿠키정보 업데이트 하기 (쿠키정보와 날짜 업데이트 -->
+	<update id="keepLogin">
+		update tbl_user set sessionkey=#{sessionId},sessionlimit=#{next} where uid=#{uid}
+	</update>
+	<!-- 쿠키 값으로 사용자의 정보를 조회하는 부분 -->
+	<select id="checkUserWithSessionKey" resultType="UserVO">
+		select * from tbl_user where sessionkey=#{value} and sessionlimit > now();
+	</select>
 </mapper>
