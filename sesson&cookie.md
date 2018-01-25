@@ -38,4 +38,9 @@ Auto Login
     Service쪽은 그냥 다오처리하는 부분으로 특별한 로직은 없다.
     **4. Controller**
     ![controller](./img/쿠키컨트롤러.png)
-    이부분이 next에 대한 처리부분으로 유저아아이도아 세션정보와 계산한 sessionlimit에 대한 정보를 가지고있음 
+    이부분이 next에 대한 처리부분으로 로그인 되어있는 현재 유저 아이디와  세션정보와 계산한 sessionlimit에 대한 정보를 가지고있음
+
+    **5. AuthInterceptor**
+    ![ath](./img/쿠키2.png)
+    loginCookie를 가지고 있는지 체크해보고  만일 Cookie 정보가 있다면 UserVO userVO= userService.checkLoginBefore(loginCookie.getValue()); (즉, 쿠키정보를 가지고 사용자의 정보가 있는지 확인한다. ) 마지막으로 쿠키정보로 조회한 사용자의 정보가 있다면 그 사용자 정보를 Session에 다시 뽑아온 사용자의 정보를 set해준다.
+    이부분은 현재 사용자가 로그인을 하지 않아서 session에 값이 존재 하지 않지만 쿠키가 존재할때 사용되는 부분이다. 

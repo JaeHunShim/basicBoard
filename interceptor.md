@@ -46,4 +46,4 @@ privacy restriction(Intercepter)
 
   ### p.s
     * 인터셉터의 경우는 Repository 에 SpringStudy 에 예제를 통해서 정리해놓은것이 있으니 그쪽을 보면 더 이해하기 쉬울수 있다.
-    * 오류: 하면서 오류 난것은 Session을 사용해서 사용자 id를 즉 uid를 받아오는데 어처구니 없이 JSP에서 **<%@ page session="false" %>** 부분을 삭제 하지 않아서 log쪽에서는 오류가 없어서 많이 고생했다. 명심하자~! session을 사용할려면 이부분을 없애야 사용할 수 있다. 
+    * 오류: 하면서 오류 난것은 Session을 사용해서 사용자 id를 즉 uid를 받아오는데 어처구니 없이 JSP에서 **<%@ page session="false" %>** 부분을 삭제 하지 않아서 log쪽에서는 오류가 없어서 많이 고생했다. 명심하자~! session을 사용할려면 이부분을 없애야 사용할 수 있다.
