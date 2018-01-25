@@ -36,7 +36,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 				
 				logger.info("remember id---------------");
 				Cookie loginCookie=new Cookie("loginCookie",session.getId()); //session 에 있는 아이디를 가져와서 쿠키객체를 생성한다(loginCookie라는 키로)
-				loginCookie.setPath("/");
+				loginCookie.setPath("/");// 모든경로에서 쿠키정보를 접근 가능하도록 함 그래서 페이지가 바뀌어도 쿠키 정보를 볼수 잇음 
 				loginCookie.setMaxAge(60*60*24*7); // 60초*60분*24시간*7일 = 7일간 쿠키유지
 			
 				response.addCookie(loginCookie); //생성한 쿠키를  response에 담아서 보낸다

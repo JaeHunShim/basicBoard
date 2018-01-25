@@ -65,7 +65,7 @@ public class UserController {
 			Cookie loginCookie=WebUtils.getCookie(request, "loginCookie");
 			
 			if(loginCookie != null) {
-				loginCookie.setPath("/");
+				loginCookie.setPath("/"); //모든경로에 접근가능하도록 하기 위해서 / setpath지정 
 				loginCookie.setMaxAge(0);
 				response.addCookie(loginCookie);
 				userService.keepLogin(vo.getUid(), session.getId(), new Date());
