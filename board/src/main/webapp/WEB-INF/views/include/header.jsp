@@ -33,7 +33,6 @@
     
   <body class="skin-blue sidebar-mini">
     <div class="wrapper">
-      
       <header class="main-header">
         <!-- Logo -->
         <a href="/resources/index2.html" class="logo">

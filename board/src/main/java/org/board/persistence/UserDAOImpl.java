@@ -43,5 +43,11 @@ public class UserDAOImpl implements UserDAO {
 		
 		return sqlSession.selectOne(namespace+".checkUserWithSessionKey", value);
 	}
+	//회원 가입
+	@Override
+	public void join(UserVO userVO) throws Exception {
+		
+		sqlSession.insert(namespace+".insertMember", userVO);
+	}
 
 }

@@ -13,4 +13,6 @@ public interface UserDAO {
 	public void keepLogin(String uid, String sessionId,Date next);
 	// 3. 쿠키정보 불러오기
 	public UserVO checkUserWithSessionKey(String value);
+	// 4. 회원 가입
+	public void join(UserVO userVO) throws Exception;
 }

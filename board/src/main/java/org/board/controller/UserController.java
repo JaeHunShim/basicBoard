@@ -73,6 +73,19 @@ public class UserController {
 		}
 		return "redirect:/user/login";
 	}
+	@RequestMapping(value="/join",method=RequestMethod.GET)
+	public String join() {
+		
+		return "/user/join";
+	}
+	//회원가입
+	@RequestMapping(value="/join",method=RequestMethod.POST)
+	public String memberJoin(UserVO userVO) throws Exception{
+		
+		userService.join(userVO);
+		
+		return "redirect:/user/login";
+	}
 	
 	
 }

@@ -12,6 +12,7 @@ public interface UserService {
 	public void keepLogin(String uid,String sessionId, Date next) throws Exception;
 	// session 정보를 가지고 사용자 정보를 모두 뽑아오는 부분
 	public UserVO checkLoginBefore(String value) throws Exception;
-	
+	// 회원 가입
+	public void join(UserVO userVO) throws Exception;
 	
 }

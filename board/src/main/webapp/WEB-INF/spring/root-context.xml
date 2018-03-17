@@ -21,7 +21,7 @@
 	
 	<property name="url" value="jdbc:log4jdbc:mysql://127.0.0.1:3306/board?useSSL=false"></property>	
 	<property name="username" value="root"></property>
-	<property name="password" value="1234"></property>
+	<property name="password" value="wognsl83"></property>
 	</bean>
 	<!-- DB연결과 SQL 실행에 관한 모든것을 가지고 있는 객체 -->
 	<bean id="sqlSessionFactory"

@@ -6,6 +6,7 @@ public class UserVO {
 	private String upw;
 	private String uname;
 	private int upoint;
+	private String email;
 	
 	public String getUid() {
 		return uid;
@@ -31,13 +32,18 @@ public class UserVO {
 	public void setUpoint(int upoint) {
 		this.upoint = upoint;
 	}
-	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	@Override
 	public String toString() {
-		return "UserVO [uid=" + uid + ", upw=" + upw + ", uname=" + uname + ", upoint=" + upoint + ", getUid()="
-				+ getUid() + ", getUpw()=" + getUpw() + ", getUname()=" + getUname() + ", getUpoint()=" + getUpoint()
-				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
-				+ "]";
+		return "UserVO [uid=" + uid + ", upw=" + upw + ", uname=" + uname + ", upoint=" + upoint + ", email=" + email
+				+ ", getUid()=" + getUid() + ", getUpw()=" + getUpw() + ", getUname()=" + getUname() + ", getUpoint()="
+				+ getUpoint() + ", getEmail()=" + getEmail() + ", getClass()=" + getClass() + ", hashCode()="
+				+ hashCode() + ", toString()=" + super.toString() + "]";
 	}
 	
 	

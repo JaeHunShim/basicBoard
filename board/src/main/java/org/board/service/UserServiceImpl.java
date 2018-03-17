@@ -33,5 +33,10 @@ public class UserServiceImpl implements UserService {
 		
 		return userDAO.checkUserWithSessionKey(value);
 	}
+	@Override
+	public void join(UserVO userVO) throws Exception {
+		
+		userDAO.join(userVO);
+	}
 
 }

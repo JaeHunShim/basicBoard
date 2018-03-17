@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <mapper namespace="org.board.mapper.UserMapper">
 	<!--  로그인 할때 아디와 패스워드 검색  -->
 	<select id="login" resultType="UserVO">
@@ -14,4 +13,8 @@
 	<select id="checkUserWithSessionKey" resultType="UserVO">
 		select * from tbl_user where sessionkey=#{value} and sessionlimit > now();
 	</select>
+	<!-- 회원 삽입 -->
+	<insert id="insertMember">
+		insert into tbl_user(uid,upw,uname,email) values(#{uid},#{upw},#{uname},#{email});
+	</insert>
 </mapper>
