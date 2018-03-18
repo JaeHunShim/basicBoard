@@ -14,5 +14,7 @@ public interface UserService {
 	public UserVO checkLoginBefore(String value) throws Exception;
 	// 회원 가입
 	public void join(UserVO userVO) throws Exception;
-	
+	// 인증이메일 받아오기
+	public void userAuth(String email) throws Exception;
+
 }

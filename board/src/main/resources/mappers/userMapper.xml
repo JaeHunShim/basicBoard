@@ -17,4 +17,8 @@
 	<insert id="insertMember">
 		insert into tbl_user(uid,upw,uname,email) values(#{uid},#{upw},#{uname},#{email});
 	</insert>
+	<!-- 인증키 생성 -->
+	<update id="createAuthKey">
+		update tbl_user set authCode = #{authCode} where email =#{email}
+	</update>
 </mapper>

@@ -7,6 +7,7 @@ public class UserVO {
 	private String uname;
 	private int upoint;
 	private String email;
+	private String authCode;
 	
 	public String getUid() {
 		return uid;
@@ -38,12 +39,20 @@ public class UserVO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	public String getAuthCode() {
+		return authCode;
+	}
+	public void setAuthCode(String authCode) {
+		this.authCode = authCode;
+	}
+	
 	@Override
 	public String toString() {
 		return "UserVO [uid=" + uid + ", upw=" + upw + ", uname=" + uname + ", upoint=" + upoint + ", email=" + email
-				+ ", getUid()=" + getUid() + ", getUpw()=" + getUpw() + ", getUname()=" + getUname() + ", getUpoint()="
-				+ getUpoint() + ", getEmail()=" + getEmail() + ", getClass()=" + getClass() + ", hashCode()="
-				+ hashCode() + ", toString()=" + super.toString() + "]";
+				+ ", authCode=" + authCode + ", getUid()=" + getUid() + ", getUpw()=" + getUpw() + ", getUname()="
+				+ getUname() + ", getUpoint()=" + getUpoint() + ", getEmail()=" + getEmail() + ", getAuthCode()="
+				+ getAuthCode() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
+				+ super.toString() + "]";
 	}
 	
 	

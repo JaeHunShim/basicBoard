@@ -49,5 +49,20 @@ public class UserDAOImpl implements UserDAO {
 		
 		sqlSession.insert(namespace+".insertMember", userVO);
 	}
-
+	@Override
+	public void createAuthKey(String email,String authCode) throws Exception{
+		
+		UserVO userVO = new UserVO();
+		
+		userVO.setAuthCode(authCode);
+		userVO.setEmail(email);
+		
+		sqlSession.selectOne(namespace+".createAuthKey",userVO);
+	}
+	@Override
+	public void userAuth(String email) throws Exception {
+		
+		sqlSession.update(namespace+".userAuth", email);
+		
+	}
 }

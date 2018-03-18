@@ -15,4 +15,8 @@ public interface UserDAO {
 	public UserVO checkUserWithSessionKey(String value);
 	// 4. 회원 가입
 	public void join(UserVO userVO) throws Exception;
+	// 5. 이메일 인증
+	public void createAuthKey(String email,String authCode) throws Exception;
+	// 6. 저장된 이메일 가지고 오기 
+	public void userAuth(String email) throws Exception;
 }
