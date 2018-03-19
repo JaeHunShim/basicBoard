@@ -14,7 +14,7 @@ public class TempKey {
 			
 			return init();
 		}
-		
+		//난수를 발생시켜서 키값 생성
 		private String init() {
 			
 			Random ran = new Random();

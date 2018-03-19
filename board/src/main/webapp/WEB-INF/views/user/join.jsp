@@ -56,9 +56,6 @@
             <div class="form-group">
               <label for="InputEmail">E-Mail</label>
               <input type="email" class="form-control" name="email" placeholder="이메일을 입력해주세요">
-              <span class="input-group-btn">
-                  <button class="btn btn-success">인증번호 전송<i class="fa fa-mail-forward spaceLeft"></i></button>
-              </span>
             </div>
             <div class="form-group text-center">
               <button type="submit" class="btn btn-info">회원가입<i class="fa fa-check spaceLeft"></i></button>

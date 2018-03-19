@@ -83,13 +83,11 @@ public class UserController {
 		return "/user/join";
 	}
 	//회원가입
-	@Transactional
 	@RequestMapping(value="/join",method=RequestMethod.POST)
 	public String memberJoin(UserVO userVO,Model model,RedirectAttributes rttr, HttpServletRequest request) throws Exception{
 		logger.info("회원가입");
 		userService.join(userVO);
 		rttr.addFlashAttribute("authmsg", "가입시 사용한 이메일로 인증해주기 ");
-		
 		return "redirect:/user/login";
 	}
 	// 이메일인증
@@ -97,7 +95,6 @@ public class UserController {
 	public String emailConfirm(String email, Model model) throws Exception { 
 		userService.userAuth(email);
 		model.addAttribute("email", email);
-
 		return "/user/emailConfirm";
 	}
 	
