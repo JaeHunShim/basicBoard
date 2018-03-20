@@ -8,6 +8,7 @@ public class UserVO {
 	private int upoint;
 	private String email;
 	private String authCode;
+	private String verity;
 	
 	public String getUid() {
 		return uid;
@@ -45,14 +46,19 @@ public class UserVO {
 	public void setAuthCode(String authCode) {
 		this.authCode = authCode;
 	}
-	
+	public String getVerity() {
+		return verity;
+	}
+	public void setVerity(String verity) {
+		this.verity = verity;
+	}
 	@Override
 	public String toString() {
 		return "UserVO [uid=" + uid + ", upw=" + upw + ", uname=" + uname + ", upoint=" + upoint + ", email=" + email
-				+ ", authCode=" + authCode + ", getUid()=" + getUid() + ", getUpw()=" + getUpw() + ", getUname()="
-				+ getUname() + ", getUpoint()=" + getUpoint() + ", getEmail()=" + getEmail() + ", getAuthCode()="
-				+ getAuthCode() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
-				+ super.toString() + "]";
+				+ ", authCode=" + authCode + ", verity=" + verity + ", getUid()=" + getUid() + ", getUpw()=" + getUpw()
+				+ ", getUname()=" + getUname() + ", getUpoint()=" + getUpoint() + ", getEmail()=" + getEmail()
+				+ ", getAuthCode()=" + getAuthCode() + ", getVerity()=" + getVerity() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
 	}
 	
 	

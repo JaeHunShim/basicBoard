@@ -21,7 +21,12 @@
 	<update id="createAuthKey">
 		update tbl_user set authCode = #{authCode} where email =#{email}
 	</update>
+	<!-- 이메일 다시 업댓 -->
 	<update id= "userAuth">
 		update tbl_user set email=#{email}
+	</update>
+	<!-- 이메일인증 하면 verity 값을 n에서 y로 바꿈 -->
+	<update id='updateVerity'>
+		update tbl_user set verity='y' where email=#{email}
 	</update>
 </mapper>

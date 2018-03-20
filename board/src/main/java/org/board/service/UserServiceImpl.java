@@ -55,6 +55,7 @@ public class UserServiceImpl implements UserService {
 		sendMail.setText(new StringBuffer().append("<h1>메일 인증</h1>")
 				.append("<a href='http://localhost:8080/user/emailConfirm?email=")
 				.append(userVO.getEmail())
+				.append(userVO.getVerity())
 				.append("&key=").append(key)
 				.append("' target='_blenk'>이메일 인증 확인</a>").toString());
 		sendMail.setFrom("jaehuniya@gamil.com", "관리자");
@@ -64,8 +65,10 @@ public class UserServiceImpl implements UserService {
 	//인증된 이메일 가지고 오기
 	@Override
 	public void userAuth(String email) throws Exception {
-		
 		userDAO.userAuth(email);
 	}
-
+	@Override
+	public void verityUpdate(String verity) throws Exception {
+		userDAO.verityUpdate(verity);
+	}
 }

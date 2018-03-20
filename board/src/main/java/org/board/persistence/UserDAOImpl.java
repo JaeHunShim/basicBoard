@@ -65,4 +65,10 @@ public class UserDAOImpl implements UserDAO {
 		sqlSession.update(namespace+".userAuth", email);
 		
 	}
+	@Override
+	public void verityUpdate(String verity) throws Exception {
+		
+		sqlSession.update(namespace+".updateVerity",verity);
+		
+	}
 }
