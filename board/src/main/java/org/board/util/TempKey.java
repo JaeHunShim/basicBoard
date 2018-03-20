@@ -1,4 +1,4 @@
-package org.board.domain;
+package org.board.util;
 
 import java.util.Random;
 

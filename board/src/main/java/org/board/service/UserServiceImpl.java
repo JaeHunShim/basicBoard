@@ -4,11 +4,11 @@ import java.util.Date;
 
 import javax.inject.Inject;
 
-import org.board.domain.MailHandler;
-import org.board.domain.TempKey;
 import org.board.domain.UserVO;
 import org.board.dto.LoginDTO;
 import org.board.persistence.UserDAO;
+import org.board.util.MailHandler;
+import org.board.util.TempKey;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

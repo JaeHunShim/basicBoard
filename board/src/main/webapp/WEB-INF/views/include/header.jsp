@@ -250,8 +250,7 @@
                   <!-- User image -->
                   <li class="user-header">
                     <img src="/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
-                    <p>
-                      ${login.uid}
+                    <p>${login.uid}
                       <small>로그인 중입니다.</small>
                     </p>
                   </li>
