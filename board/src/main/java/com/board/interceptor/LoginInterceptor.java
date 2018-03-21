@@ -23,15 +23,11 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 							Object handler, ModelAndView mav) throws Exception{
 		
 		HttpSession session=request.getSession(); // session 객체를 생성 
-		
 		ModelMap modelMap=mav.getModelMap(); // ModelMap 객체 생성 
 		Object userVO=modelMap.get("userVO");// vo데이터를 가지고 와서 map에 담음 
-		
 		if(userVO != null) {
-			
 			logger.info("new login success");
 			session.setAttribute(LOGIN, userVO); //session에 vo객체를 다 넣어놓음 
-			
 			if(request.getParameter("useCookie") != null) {
 				
 				logger.info("remember id---------------");

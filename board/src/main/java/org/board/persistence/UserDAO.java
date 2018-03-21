@@ -19,6 +19,5 @@ public interface UserDAO {
 	public void createAuthKey(String email,String authCode) throws Exception;
 	// 6. 저장된 이메일 가지고 오기 
 	public void userAuth(String email) throws Exception;
-	// 7. 이메일 인증 컬럼 바꾸기
-	public void verityUpdate(String verity) throws Exception;
+
 }

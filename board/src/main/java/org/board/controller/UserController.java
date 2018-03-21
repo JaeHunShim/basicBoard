@@ -1,5 +1,6 @@
 package org.board.controller;
 
+import java.io.PrintWriter;
 import java.util.Date;
 
 import javax.inject.Inject;
@@ -36,22 +37,15 @@ public class UserController {
 	//로그인 처리 
 	@RequestMapping(value="/loginPost",method=RequestMethod.POST)
 	public void loginPOST(LoginDTO dto, HttpSession session, Model model) throws Exception{
-		
 		UserVO vo = userService.login(dto);
-		
 		if(vo==null) {
-			
 			return;
 		}
 		model.addAttribute("userVO", vo);
-		
 		if(dto.isUseCookie()) {
-			
-			int amount = 60*60*24*7;
-			
-			Date sessionlimit= new Date(System.currentTimeMillis()+(1000*amount));
-			
-			userService.keepLogin(vo.getUid(), session.getId(), sessionlimit);
+				int amount = 60*60*24*7;
+				Date sessionlimit= new Date(System.currentTimeMillis()+(1000*amount));
+				userService.keepLogin(vo.getUid(), session.getId(), sessionlimit);
 		}
 	}
 	//로그아웃 처리
@@ -92,11 +86,9 @@ public class UserController {
 	}
 	// 이메일인증
 	@RequestMapping(value = "/emailConfirm", method = RequestMethod.GET)
-	public String emailConfirm(String email,String verity, Model model) throws Exception {
-		userService.verityUpdate(verity);
+	public String emailConfirm(String email, Model model) throws Exception {
 		userService.userAuth(email);
 		model.addAttribute("email", email);
-		model.addAttribute("verity",verity);
 		return "/user/emailConfirm";
 	}
 	

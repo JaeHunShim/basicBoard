@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.board.mapper.UserMapper">
-	<!--  로그인 할때 아디와 패스워드 검색  -->
+	<!--  로그인 할때 아디와 패스워드 검색하고 verity값을 조회해서 인증했는지까지 검사 -->
 	<select id="login" resultType="UserVO">
-		select uid,upw,uname from tbl_user where uid=#{uid} and upw=#{upw}
+		select uid,upw,uname,verity from tbl_user where uid=#{uid} and upw=#{upw}
 	</select>
 	<!--  쿠키정보 업데이트 하기 (쿠키정보와 날짜 업데이트 -->
 	<update id="keepLogin">
@@ -21,12 +21,8 @@
 	<update id="createAuthKey">
 		update tbl_user set authCode = #{authCode} where email =#{email}
 	</update>
-	<!-- 이메일 다시 업댓 -->
+	<!-- 이메일 확인하면 verity 값을 y로 바꾸기 -->
 	<update id= "userAuth">
-		update tbl_user set email=#{email}
-	</update>
-	<!-- 이메일인증 하면 verity 값을 n에서 y로 바꿈 -->
-	<update id='updateVerity'>
 		update tbl_user set verity='y' where email=#{email}
 	</update>
 </mapper>

@@ -16,7 +16,5 @@ public interface UserService {
 	public void join(UserVO userVO) throws Exception;
 	// 인증이메일 받아오기
 	public void userAuth(String email) throws Exception;
-	// verity 값 바꾸기
-	public void verityUpdate(String verity) throws Exception;
 
 }
