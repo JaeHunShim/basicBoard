@@ -64,5 +64,4 @@ public class UserDAOImpl implements UserDAO {
 		
 		sqlSession.update(namespace+".userAuth", email);
 	}
-
 }

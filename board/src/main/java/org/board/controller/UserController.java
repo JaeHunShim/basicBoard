@@ -20,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.WebUtils;
 
@@ -38,6 +39,7 @@ public class UserController {
 	@RequestMapping(value="/loginPost",method=RequestMethod.POST)
 	public void loginPOST(LoginDTO dto, HttpSession session, Model model) throws Exception{
 		UserVO vo = userService.login(dto);
+		//System.out.println("verity 값은 -------"+ vo.getVerity());
 		if(vo==null) {
 			return;
 		}
@@ -48,6 +50,7 @@ public class UserController {
 				userService.keepLogin(vo.getUid(), session.getId(), sessionlimit);
 		}
 	}
+
 	//로그아웃 처리
 	@RequestMapping(value="/logout",method=RequestMethod.GET)
 	public String logout(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception{

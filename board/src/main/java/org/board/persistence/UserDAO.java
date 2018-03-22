@@ -7,7 +7,7 @@ import org.board.dto.LoginDTO;
 
 public interface UserDAO {
 	
-	// 1. 로그인할때 사용자 정보 
+	// 1. 로그인할때 사용자 정보
 	public UserVO login(LoginDTO dto) throws Exception;
 	// 2. 세션정보 업데이트
 	public void keepLogin(String uid, String sessionId,Date next);

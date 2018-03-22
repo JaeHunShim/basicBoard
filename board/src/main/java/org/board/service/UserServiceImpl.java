@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.board.domain.UserVO;
 import org.board.dto.LoginDTO;
@@ -21,10 +22,9 @@ public class UserServiceImpl implements UserService {
 	UserDAO userDAO;
 	@Inject
 	private JavaMailSender mailSender;
-	
+	//로그인 
 	@Override
 	public UserVO login(LoginDTO dto) throws Exception {
-		
 		return userDAO.login(dto);
 	}
 	// id로 session 정보와  session 날짜를 업데이트 
@@ -68,5 +68,4 @@ public class UserServiceImpl implements UserService {
 	public void userAuth(String email) throws Exception {
 		userDAO.userAuth(email);
 	}
-
 }

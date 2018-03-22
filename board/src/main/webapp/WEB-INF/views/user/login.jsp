@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +10,7 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 <link href="/resources/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
 <link href="/resources/plugins/iCheck/square/blue.css" rel="stylesheet" type="text/css" />
+<script src="/resources/plugins/jQuery/jQuery-2.1.4.min.js"></script>
 </head>
 <body class="login-page">
 	<div class="login-box">
@@ -37,6 +39,11 @@
 					<!-- /.col -->
 					<div class="col-xs-4">
 						<button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+						<c:if test="${msg =='fail'}">
+                    		<div style="color: red">
+                        		이메일 인증을 해주세요
+                    		</div>
+                    	</c:if>
 					</div>
 					<!-- /.col -->	
 				</div>

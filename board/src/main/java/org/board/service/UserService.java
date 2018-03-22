@@ -2,6 +2,8 @@ package org.board.service;
 
 import java.util.Date;
 
+import javax.servlet.http.HttpSession;
+
 import org.board.domain.UserVO;
 import org.board.dto.LoginDTO;
 
