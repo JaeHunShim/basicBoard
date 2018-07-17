@@ -28,6 +28,7 @@ public class BoardController {
 	@RequestMapping(value="/register",method=RequestMethod.GET)
 	public void registerGet(BoardVO vo,Model model) throws Exception {
 		logger.info("register GET........................");
+		
 	}
 	//글작성 처리  RedirectAttributes 를 사용해서  리다이렉트 처리할때 새로고침 했을때 게속 삽입할수 없게 처리 
 	@RequestMapping(value="/register",method=RequestMethod.POST)

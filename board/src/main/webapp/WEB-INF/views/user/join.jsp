@@ -5,11 +5,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="/resources/css/bootstrap/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="/resources/bootstrap/css/font-awesome.min.css" media="screen" title="no title">
 <link rel="stylesheet" type="text/css" href="/resources/bootstrap/css/style.css" media="screen" title="no title">
 <script src="/resources/plugins/jQuery/jQuery-2.1.4.min.js"></script>
-<script src="/resources/bootstrap/js/bootstrap.min.js"></script>
+<script src="/resources/js/bootstrap/bootstrap.min.js"></script>
 <title>Insert title here</title>
 <script>
 	$(document).ready(function(){
@@ -30,10 +30,14 @@
 </script>
 </head>
 <body>
+
  <article class="container">
         <div class="page-header">
+        	<div class="modal-header">
           <h1>회원가입 <small>basic form</small></h1>
+          	</div>
         </div>
+        <div class="modal-body">
         <div class="col-md-6 col-md-offset-3">
           <form role="form" method="post" action="/user/join">
             <div class="form-group">
@@ -57,11 +61,14 @@
               <label for="InputEmail">E-Mail</label>
               <input type="email" class="form-control" name="email" placeholder="이메일을 입력해주세요">
             </div>
+            <div class="modal-footer">
             <div class="form-group text-center">
               <button type="submit" class="btn btn-info">회원가입<i class="fa fa-check spaceLeft"></i></button>
               <button type="submit" class="btn btn-warning">가입취소<i class="fa fa-times spaceLeft"></i></button>
             </div>
+            </div>
           </form>
+        </div>
         </div>
        </article>
 </body>
